@@ -1,0 +1,128 @@
+Why use Docker?
+It makes life pretty much easy. It makes packages and software easy to install and run.
+
+What is Docker?
+Docker is a platform or ecosystem around creating and running containers
+
+
+What is a container?
+Docker CLI reached out Docker Hub and downloaded single file called image.
+Image is single file containing all the dependencies and the configurations required to run specific program (ex. Redis).
+
+You can store Image on Hard drive and run it whenever needed.
+And instance of an Image (running program) is called container.
+
+Container is a program which has its own set of hardware resources.It has own space of memory, networking technology etc.
+
+Docker client : We will issue commands to the Docker Client.
+Docker Server : It is responsible to create images, running containers etc.
+
+
+
+Docker run <program name/ image name>
+Docker ps
+Docker ps --all
+
+
+
+Lifecycle of a container
+
+
+docker run = docker create + docker start
+
+docker create hello-world -> container created and ID provided
+
+docker start -a ID
+-a : is used to watch output on the computer
+if -a is not provided it will just start the container
+
+
+
+
+List all the containers: docker ps -all
+Start container: "docker -a start ID" or "docker start ID"
+Delete all stopped containers: "docker system prune"
+See logs of the container : "docker logs ID"
+
+Stop running container: 
+docker stop ID 
+(allows program to clean up or perform any actions before shutting down)
+docker kill ID
+(shuts down container on the spot)
+On Docker stop, if container doesn't stop in 10 seconds, automatically docker applies docker kill immediately.
+
+
+
+
+
+-----------------------------------------------
+
+
+terminal 1: Docker run redis
+terminal 2: docker exec -it ID redis-cli
+ex. set myvalue 5 -> get myvalue -> 5
+
+
+
+---------------------------------------------
+
+
+Alternative of using exec every time to execute command in the container :
+We can start a Shell in the container using EXEC once and then execute all the commands as we execute in Windows shell terminal
+
+docker exec -it ID sh
+ex. cd ..
+ex. ls
+ex. mkdir project
+
+--------------------------------------------
+
+
+
+How to build custom image?
+
+
+create a docker file. (its a plain text file with some configurations.)
+File will be created -> passed through docker client -> docker server -> and its now usable.
+
+
+
+mkdir redis-image
+cd redis-image
+code .
+
+Add new file without any extension: Dockerfile
+
+
+# use an existing docker image as the base
+
+FROM alpine
+
+#download and install a dependency
+
+RUN apk add --update redis
+#tell the image what to do when it starts as a container
+
+CMD ["redis-server"]
+
+
+---------------------------------------------
+
+docker build .
+
+You will see a message "Succcessfully built"
+
+docker run ID
+
+message: Ready to build connections
+
+
+----------------------------------------------
+
+
+
+
+
+
+
+

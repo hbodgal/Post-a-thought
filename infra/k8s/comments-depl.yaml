@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+	name: comments-depl
+spec:
+	replicas: 1
+	selectors:
+		matchLabels:
+			app: comments
+	template:
+		metadata:
+			labels:
+				app: comments
+		spec:
+			containers:
+				- name: comments
+				image: hb/comments:0.0.1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-clusterip-srv
+spec:
+  selector:
+    app: comments
+  ports:
+    -name: comments
+    protocol: TCP
+    port: 4000
+    targetPort: 4000
