@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-	name: posts-depl
+metadata:
+  name:	event-bus-depl
 spec:
-	replicas: 1
-	selectors:
-		matchLabels:
-			app: posts
-	template:
-		metadata:
-			labels:
-				app: posts
-		spec:
-			containers:
-				- name: posts
-				image: hb/posts:0.0.1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: harshbodgal/event-bus
 ---
 apiVersion: v1
 kind: Service
@@ -25,7 +25,7 @@ spec:
     app: event-bus
   type: ClusterIP
   ports:
-    -name: event-bus
-    protocol: TCP
-    port: 4005
-    targetPort: 4005
+    - name: event-bus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-	name: query-depl
+  name: query-depl
 spec:
-	replicas: 1
-	selectors:
-		matchLabels:
-			app: query
-	template:
-		metadata:
-			labels:
-				app: query
-		spec:
-			containers:
-				- name: query
-				image: hb/query:0.0.1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: query
+  template:
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+        - name: query
+          image: harshbodgal/query
 ---
 apiVersion: v1
 kind: Service
@@ -23,8 +23,9 @@ metadata:
 spec:
   selector:
     app: query
+  type: ClusterIP
   ports:
-    -name: query
-    protocol: TCP
-    port: 4000
-    targetPort: 4000
+    - name: query
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

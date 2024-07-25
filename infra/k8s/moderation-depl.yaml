@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-	name: moderation-depl
+metadata:
+  name: moderation-depl
 spec:
-	replicas: 1
-	selectors:
-		matchLabels:
-			app: moderation
-	template:
-		metadata:
-			labels:
-				app: moderation
-		spec:
-			containers:
-				- name: moderation
-				image: hb/moderation:0.0.1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moderation
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: harshbodgal/moderation
 ---
 apiVersion: v1
 kind: Service
@@ -23,8 +23,9 @@ metadata:
 spec:
   selector:
     app: moderation
+  type: ClusterIP
   ports:
-    -name: moderation
-    protocol: TCP
-    port: 4000
-    targetPort: 4000
+    - name: moderation
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
