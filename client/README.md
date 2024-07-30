@@ -83,3 +83,43 @@ We need persistant database to store comments. But still we cannot retrive it; a
 what if moderation service goes down. Will it be able to moderate events later and update status?
 This issue was not covered in the tutorial. But i handled it on my own.
 Solution:  We need to fetch all the events stored, filter out commentCreated event, moderate comment and create commentUpdated event.
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+Addition of DockerFile, infrastructure files (infra -> k8 -> files)
+
+Containerized all the microservices and client application files using Docker.
+Docker files focuses on building images, installing dependencies, copy files to the image and configure how the container should run.
+
+Added deployment files to deploy and manage services on Kubernates. 
+It containes YAML files for Kubernetes, Docker compose files, Helm charts or config scripts. It mentions resource requirements, storage, instances required, and scaling rules.
+
+Added Ingress Nginix to expose microservices to the outside world. Using Ingress-nginix services are accessed on posts.com/ url on port 80 locally.
+
+
+--------------------------------------------------------------
+
+Created depl file for client and deployed on kubernetes. 
+Here we had 2 routes, GET Posts/ and POST Posts/
+Now depl file will forward request to /posts but it doesnt have capability to identify and forward request based on GET/POST
+So, we changed POST /posts route to POST /posts/create.
+
+Now we have Ingress service that will forward request to appropriate Route and client service which will serve the HTML files on /.
+
+
+-----------------------------------------------------------------
+
+introducing Skaffold (skaffold.dev)
+Easy to create/delete 
+
+choco install skaffold
+
+Created a skaffold.yaml which sits at the root directory and manages building image and deployment.
+
+-------------------------------------------------------------
+
+Skaffold is responsible to update the changes in the files and push it to Docker and rebuild if needed. Skaffold will push the changes into the pods. But you need to have your mechanism to detact the changes and run it again.
+For react app we use 'create react app' and in nodejs files we use nodemon. Its called Hot Module replacement.
+

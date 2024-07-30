@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: comments-depl
+  name: client-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: comments
+      app: client
   template:
     metadata:
       labels:
-        app: comments
+        app: client
     spec:
       containers:
-        - name: comments
-          image: harshbodgal/comments
+        - name: client
+          image: harshbodgal/client
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: comments-clusterip-srv
+  name: client-clusterip-srv
 spec:
   selector:
-    app: comments
+    app: client
   type: ClusterIP
   ports:
-    - name: comments
+    - name: client
       protocol: TCP
-      port: 4001
-      targetPort: 4001
+      port: 3000
+      targetPort: 3000
