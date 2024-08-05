@@ -2,6 +2,7 @@
 
 ## Overview
 This project implements a microservices architecture using Node.js and Express, orchestrated with Kubernetes (K8s) and managed with Skaffold. It utilizes an event-driven approach for communication between services.
+This architecture provides flexibility, scalability, and fault tolerance through asynchronous event-driven communication, suitable for modern cloud-native applications.
 
 ## Services
 1. **Post Service**: Manages creation and listing of posts.
@@ -22,19 +23,10 @@ An event bus facilitates asynchronous communication between microservices:
 - **Dockerization**: Containerized microservices and client applications using Docker for consistency across environments.
 - **Kubernetes**: Deployed microservices on Kubernetes for orchestration, utilizing Ingress Nginx for external access and Skaffold for automated builds and deployments.
 
-## Handling Failures
+## Handled Failures
 1. **Service Dependencies**: Minimized through asynchronous communication via the event bus.
 2. **Fault Tolerance**: Event store ensures events are not lost, allowing services to catch up on missed events during downtime.
-3. **Database Access**: Query Service can directly access databases to fetch data in case of service unavailability.
-
-## Future Improvements
-- **Performance**: Optimize event handling and data aggregation in the Query Service for scalability.
-- **Monitoring**: Implement monitoring and alerting for service health and event processing.
-- **Security**: Enhance security measures, including authentication and authorization for microservices.
 
 ## Usage
 1. **Local Development**: Use Skaffold for local development, ensuring changes are reflected in Docker containers and Kubernetes pods.
 2. **Deployment**: Deploy using Kubernetes YAML files and Helm charts, managing resources and scaling rules.
-
-## Conclusion
-This architecture provides flexibility, scalability, and fault tolerance through asynchronous event-driven communication, suitable for modern cloud-native applications.
