@@ -1,5 +1,7 @@
 # Microservices Architecture with Event-Driven Communication
 
+This app allows users to share their thoughts and comment on posts. It includes a robust content moderation system to ensure the platform is used appropriately and safely.
+
 ## Overview
 This project implements a microservices architecture using Node.js and Express, orchestrated with Kubernetes (K8s) and managed with Skaffold. It utilizes an event-driven approach for communication between services.
 This architecture provides flexibility, scalability, and fault tolerance through asynchronous event-driven communication, suitable for modern cloud-native applications.
