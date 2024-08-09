@@ -8,7 +8,7 @@ app.use(bodyparser.json());
 const moderateEvent = async (type, data) => {
     const status = data.content.includes('orange') ? 'rejected' : 'approved';
         // calling /events in event-bus and sending status update
-        await axios.post('http://localhost:4005/events', {
+        await axios.post('http://event-bus-srv:4005/events', {
             type: 'CommentModerated',
             data: {
                 id: data.id,
@@ -30,7 +30,7 @@ app.post('/events', async (req, res) => {
 app.listen(4003, async () => {
     console.log('listening on 4003!');
     try {
-        const res = await axios.get("http://localhost:4005/events");
+        const res = await axios.get("http://event-bus-srv:4005/events");
      
         for (let event of res.data) {
             if(event.type === 'CommentCreated') {
